@@ -1,5 +1,46 @@
 // Auto-scroll featured strip; pauses on hover/focus
 (function(){
+    const productCatalog = {
+        lipstick: {
+            name: 'Luxury Lipstick',
+            price: 25,
+            image: 'images/lipstick.jpg',
+            alt: 'Lipstick',
+            category: 'Beauty',
+            description: 'Rich color with a smooth, comfortable finish. Perfect for everyday wear or a night out.',
+            highlights: 'Long-wearing formula, creamy application, and a soft satin finish designed for a polished look.',
+            shades: ['#d4a5a5', '#c84a52', '#b3004a', '#8b1538', '#5a0f2b', '#f4a0aa']
+        },
+        foundation: {
+            name: 'Silk Foundation',
+            price: 40,
+            image: 'images/foundation.jpg',
+            alt: 'Foundation',
+            category: 'Complexion',
+            description: 'Lightweight coverage with a natural satin finish that blends seamlessly.',
+            highlights: 'Buildable coverage, breathable texture, and long-lasting comfort throughout the day.',
+            shades: ['#f1d3c5', '#e8c1ae', '#d7a68e', '#c9866a', '#b66a53', '#9c503f']
+        },
+        palette: {
+            name: 'Eyeshadow Palette',
+            price: 35,
+            image: 'images/eyeshadow.jpg',
+            alt: 'Eyeshadow Palette',
+            category: 'Eyes',
+            description: 'A versatile palette with soft mattes and luminous metallic shades.',
+            highlights: 'Blendable pigments, smooth payoff, and a curated range for day-to-night looks.',
+            shades: ['#f6d6d1', '#d8b3c4', '#aa7d9a', '#7d5b73', '#5c4d6b', '#342b48']
+        }
+    };
+
+    const productLinks = document.querySelectorAll('[data-product-id]');
+    productLinks.forEach(function(link) {
+        const productId = link.dataset.productId;
+        if (productCatalog[productId]) {
+            link.dataset.productName = productCatalog[productId].name;
+        }
+    });
+
     const strip = document.querySelector('.featured-strip');
 
     if (strip) {
@@ -39,21 +80,34 @@
     const productPrice = document.querySelector('[data-product-price]');
     const productDescription = document.querySelector('[data-product-description]');
     const productImage = document.querySelector('[data-product-image]');
+    const productCategory = document.querySelector('[data-product-category]');
+    const productHighlights = document.querySelector('[data-product-highlights]');
     const addToBagButton = document.querySelector('[data-action="add-to-bag"]');
 
     if (productName && productPrice && productDescription && productImage) {
         const params = new URLSearchParams(window.location.search);
-        const name = params.get('name') || 'Luxury Lipstick';
-        const price = params.get('price') || '25';
-        const image = params.get('image') || 'images/lipstick.jpg';
-        const alt = params.get('alt') || name;
-        const description = params.get('description') || 'Rich color with a smooth, comfortable finish.';
+        const productId = params.get('product') || 'lipstick';
+        const product = productCatalog[productId] || productCatalog.lipstick;
 
-        productName.textContent = name;
-        productPrice.textContent = `$${price}`;
-        productDescription.textContent = description;
-        productImage.src = image;
-        productImage.alt = alt;
+        productName.textContent = product.name;
+        productPrice.textContent = `$${product.price}`;
+        productDescription.textContent = product.description;
+        productImage.src = product.image;
+        productImage.alt = product.alt;
+
+        if (productCategory) {
+            productCategory.textContent = product.category;
+        }
+
+        if (productHighlights) {
+            productHighlights.textContent = product.highlights;
+        }
+
+        const shadeCirclesContainer = document.querySelector('.shade-circles');
+        if (shadeCirclesContainer && product.shades) {
+            shadeCirclesContainer.innerHTML = '';
+            shadeCirclesContainer.dataset.shades = product.shades.join(',');
+        }
 
         if (addToBagButton) {
             addToBagButton.addEventListener('click', function(){
