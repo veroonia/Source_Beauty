@@ -15,13 +15,7 @@
     <header>
         <div class="container header-inner">
             <h1 class="logo">Source Beauty</h1>
-            <nav class="main-nav">
-                <a href="#">New In</a>
-                <a href="#">Makeup</a>
-                <a href="#">Skincare</a>
-                <a href="#">Offers</a>
-                <a href="#">Stores</a>
-            </nav>
+            <div id="site-nav"></div>
         </div>
     </header>
 
@@ -40,16 +34,16 @@
 
     <!-- Featured Products -->
 
-    <section class="products">
+    <section class="products" id="products">
         <h2>Featured Products</h2>
         <div class="product-grid">
-            <div class="product-card">
+            <a class="product-card product-link" href="product.html?name=Luxury%20Lipstick&price=25&image=images/lipstick.jpg&alt=Lipstick&description=Rich%20color%20with%20a%20smooth%2C%20comfortable%20finish.%20Perfect%20for%20everyday%20wear%20or%20a%20night%20out.">
                 <img src="images/lipstick.jpg" alt="Lipstick">
                 <div class="product-body">
                     <h3>Luxury Lipstick</h3>
                     <p>$25</p>
                 </div>
-            </div>
+            </a>
             <div class="product-card">
                 <img src="images/foundation.jpg" alt="Foundation">
                 <div class="product-body">
@@ -104,7 +98,7 @@
     </section>
 
     <!-- Sale banner -->
-    <section class="sale-banner">
+    <section class="sale-banner" id="sale">
         <div class="container sale-inner">
             <div class="sale-text">
                 <h2>Spring Beauty Sale</h2>
@@ -124,9 +118,7 @@
     <!-- Info cards -->
     
 
-    <footer>
-        <p>© 2026 Glow Beauty. All rights reserved.</p>
-    </footer>
+    <div id="site-footer"></div>
 
     <script src="home.js" defer></script>
 </body>
