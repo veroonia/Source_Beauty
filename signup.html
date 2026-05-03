@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up – Source Beauty</title>
+    <link rel="stylesheet" href="auth.css">
+</head>
+
+<body class="auth-body">
+
+    <div class="auth-split">
+
+        <!-- ═══════════════ LEFT PANEL ═══════════════ -->
+        <div class="auth-panel-left">
+
+            <div class="petal petal-1"></div>
+            <div class="petal petal-2"></div>
+            <div class="petal petal-3"></div>
+
+            <div class="left-content">
+                <div class="left-logo">Source Beauty</div>
+                <div class="left-tagline">Bold Color. Beautiful You.</div>
+
+                <h2 class="left-headline">
+                    Join the<br><span>Beauty</span><br>Community.
+                </h2>
+
+                <p class="left-desc">
+                    Create your free account and unlock exclusive deals,
+                    early access to new collections, and a personalised beauty experience.
+                </p>
+
+                <!-- perks list -->
+                <ul style="list-style:none;padding:0;margin:0;text-align:left;display:inline-block;">
+                    <li style="color:rgba(255,255,255,0.75);font-size:0.88rem;margin-bottom:10px;display:flex;align-items:center;gap:10px;">
+                        <span style="color:#f8a4c8;font-size:1rem;">✦</span> Free shipping on your first order
+                    </li>
+                    <li style="color:rgba(255,255,255,0.75);font-size:0.88rem;margin-bottom:10px;display:flex;align-items:center;gap:10px;">
+                        <span style="color:#f8a4c8;font-size:1rem;">✦</span> Early access to new arrivals
+                    </li>
+                    <li style="color:rgba(255,255,255,0.75);font-size:0.88rem;display:flex;align-items:center;gap:10px;">
+                        <span style="color:#f8a4c8;font-size:1rem;">✦</span> Exclusive member-only offers
+                    </li>
+                </ul>
+
+                <div class="dots-grid" style="margin-top:36px;">
+                    <span></span><span></span><span></span><span></span><span></span>
+                    <span></span><span></span><span></span><span></span><span></span>
+                    <span></span><span></span><span></span><span></span><span></span>
+                    <span></span><span></span><span></span><span></span><span></span>
+                    <span></span><span></span><span></span><span></span><span></span>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- ═══════════════ RIGHT PANEL ═══════════════ -->
+        <div class="auth-panel-right">
+            <div class="auth-form-wrap">
+
+                <a href="home.html" class="auth-back">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
+                         fill="none" stroke="currentColor" stroke-width="2.5"
+                         stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="15 18 9 12 15 6"/>
+                    </svg>
+                    Back to store
+                </a>
+
+                <div class="auth-heading">
+                    <p class="auth-eyebrow">Get started</p>
+                    <h1 class="auth-title">Create Account</h1>
+                    <p class="auth-subtitle">It's free and only takes a minute</p>
+                </div>
+
+                <form class="auth-form" id="signupForm" novalidate>
+
+                    <!-- First / Last name -->
+                    <div class="form-row-half">
+                        <div class="form-group">
+                            <label for="firstName">First name</label>
+                            <div class="input-wrap">
+                                <input type="text" id="firstName" name="firstName"
+                                       placeholder="Jane"
+                                       required autocomplete="given-name">
+                            </div>
+                            <span class="field-error" id="firstNameError"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="lastName">Last name</label>
+                            <div class="input-wrap">
+                                <input type="text" id="lastName" name="lastName"
+                                       placeholder="Doe"
+                                       required autocomplete="family-name">
+                            </div>
+                            <span class="field-error" id="lastNameError"></span>
+                        </div>
+                    </div>
+
+                    <!-- Email -->
+                    <div class="form-group">
+                        <label for="signupEmail">Email address</label>
+                        <div class="input-wrap has-icon">
+                            <span class="input-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                     fill="none" stroke="currentColor" stroke-width="2"
+                                     stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                                    <polyline points="22,6 12,13 2,6"/>
+                                </svg>
+                            </span>
+                            <input type="email" id="signupEmail" name="email"
+                                   placeholder="you@example.com"
+                                   required autocomplete="email">
+                        </div>
+                        <span class="field-error" id="signupEmailError"></span>
+                    </div>
+
+                    <!-- Password -->
+                    <div class="form-group">
+                        <label for="signupPassword">Password</label>
+                        <div class="input-wrap has-icon password-wrap">
+                            <span class="input-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                     fill="none" stroke="currentColor" stroke-width="2"
+                                     stroke-linecap="round" stroke-linejoin="round">
+                                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                                    <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                                </svg>
+                            </span>
+                            <input type="password" id="signupPassword" name="password"
+                                   placeholder="At least 8 characters"
+                                   required autocomplete="new-password"
+                                   style="padding-left:42px;">
+                            <button type="button" class="toggle-pw"
+                                    aria-label="Show password" data-target="signupPassword">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                                     fill="none" stroke="currentColor" stroke-width="2"
+                                     stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                                    <circle cx="12" cy="12" r="3"/>
+                                </svg>
+                            </button>
+                        </div>
+                        <!-- segmented strength bar -->
+                        <div class="strength-track">
+                            <div class="strength-seg" id="seg1"></div>
+                            <div class="strength-seg" id="seg2"></div>
+                            <div class="strength-seg" id="seg3"></div>
+                            <div class="strength-seg" id="seg4"></div>
+                        </div>
+                        <div class="strength-row">
+                            <span class="strength-hint">Use 8+ chars, numbers &amp; symbols</span>
+                            <span class="strength-label" id="strengthLabel"></span>
+                        </div>
+                        <span class="field-error" id="signupPasswordError"></span>
+                    </div>
+
+                    <!-- Confirm Password -->
+                    <div class="form-group">
+                        <label for="confirmPassword">Confirm password</label>
+                        <div class="input-wrap has-icon password-wrap">
+                            <span class="input-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                     fill="none" stroke="currentColor" stroke-width="2"
+                                     stroke-linecap="round" stroke-linejoin="round">
+                                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                                    <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                                </svg>
+                            </span>
+                            <input type="password" id="confirmPassword" name="confirmPassword"
+                                   placeholder="Repeat your password"
+                                   required autocomplete="new-password"
+                                   style="padding-left:42px;">
+                            <button type="button" class="toggle-pw"
+                                    aria-label="Show password" data-target="confirmPassword">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                                     fill="none" stroke="currentColor" stroke-width="2"
+                                     stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                                    <circle cx="12" cy="12" r="3"/>
+                                </svg>
+                            </button>
+                        </div>
+                        <span class="field-error" id="confirmPasswordError"></span>
+                    </div>
+
+                    <!-- Terms -->
+                    <div>
+                        <label class="checkbox-label terms-label">
+                            <input type="checkbox" id="terms" name="terms" required>
+                            I agree to the <a href="#">Terms &amp; Conditions</a> and <a href="#">Privacy Policy</a>
+                        </label>
+                        <span class="field-error" id="termsError"></span>
+                    </div>
+
+                    <button type="submit" class="auth-btn">Create My Account</button>
+
+                </form>
+
+                <p class="auth-switch">
+                    Already have an account? <a href="login.html">Sign in</a>
+                </p>
+
+            </div>
+        </div>
+
+    </div><!-- end .auth-split -->
+
+    <script src="auth.js"></script>
+</body>
+</html>
