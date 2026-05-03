@@ -1,3 +1,17 @@
+// ── Inject shared nav & footer ─────────────────
+(function () {
+    function loadFragment(url, targetId) {
+        var el = document.getElementById(targetId);
+        if (!el) return;
+        fetch(url)
+            .then(function (r) { return r.text(); })
+            .then(function (html) { el.innerHTML = html; })
+            .catch(function () { /* silently ignore if file not found */ });
+    }
+    loadFragment('nav.html',    'site-nav');
+    loadFragment('footer.html', 'site-footer');
+})();
+
 // Auto-scroll featured strip; pauses on hover/focus
 (function(){
     const productCatalog = {
