@@ -842,3 +842,20 @@ footer {
         min-height: 75vh;
     }
 }
+
+/* ── Login icon in nav ── */
+.nav-login-icon {
+    display: inline-flex;
+    align-items: center;
+    margin-left: 24px;
+    color: #fff;
+    transition: color 0.2s;
+}
+
+.nav-login-icon:hover {
+    color: #f8a4c8;
+}
+
+.nav-login-icon svg {
+    display: block;
+}
