@@ -308,6 +308,18 @@ footer {
     font-weight: 700;
 }
 
+/* Shop by product link styles */
+.shop-by-product-link {
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+}
+
+.shop-by-product-link:hover h4,
+.shop-by-product-link:focus h4 {
+    color: #b3004a;
+}
+
 /* Product detail page */
 .product-page {
     min-height: 100vh;

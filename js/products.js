@@ -276,6 +276,48 @@
         });
     });
 
+    // ─── Handle URL parameters for product name & category filtering ───
+    (function() {
+        const params = new URLSearchParams(window.location.search);
+        const categoryParam = params.get('category');
+        
+        if (categoryParam) {
+            // List of specific product types for name-based filtering
+            const productNameFilters = ['lipstick', 'foundation', 'palette', 'brush', 'serum', 'balm', 'mist', 'pencil', 'gel', 'cream'];
+            
+            // Check if the parameter is a specific product name
+            if (productNameFilters.includes(categoryParam.toLowerCase())) {
+                // Filter by product name AND makeup category
+                const searchTerm = categoryParam.toLowerCase();
+                
+                // Find and check the makeup category checkbox
+                const makeupCheckbox = filterCheckboxes.find(function(checkbox) {
+                    return checkbox.name === 'category' && checkbox.value === 'makeup';
+                });
+                
+                if (makeupCheckbox) {
+                    makeupCheckbox.checked = true;
+                }
+                
+                // Also filter by product name in the cards
+                productCards.forEach(function(card) {
+                    const productName = card.querySelector('.product-name')?.textContent.trim().toLowerCase() || '';
+                    const shouldShow = productName.includes(searchTerm);
+                    card.style.display = shouldShow ? '' : 'none';
+                });
+            } else {
+                // Filter by general category - use checkbox filtering
+                const categoryCheckbox = filterCheckboxes.find(function(checkbox) {
+                    return checkbox.name === 'category' && checkbox.value === categoryParam;
+                });
+                
+                if (categoryCheckbox) {
+                    categoryCheckbox.checked = true;
+                }
+            }
+        }
+    })();
+
     syncPriceInput();
     applyFilters();
 })();

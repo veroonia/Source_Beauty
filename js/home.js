@@ -86,6 +86,18 @@
         strip.addEventListener('mouseleave', start);
         strip.addEventListener('focusin', stop);
         strip.addEventListener('focusout', start);
+        
+        // Prevent auto-scroll when user manually scrolls
+        let isUserScrolling = false;
+        strip.addEventListener('scroll', function() {
+            if (!isUserScrolling) {
+                isUserScrolling = true;
+                stop();
+                setTimeout(function() {
+                    isUserScrolling = false;
+                }, 500);
+            }
+        });
 
         start();
     }
