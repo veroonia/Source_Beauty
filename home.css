@@ -27,7 +27,7 @@ header {
 .container {
     max-width: 1100px;
     margin: 0 auto;
-    padding: 0 20px;
+    padding: 0 15px;
 }
 
 .header-inner {
@@ -42,12 +42,54 @@ header {
     letter-spacing: 1px;
 }
 
+.main-nav {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+}
+
 .main-nav a {
     color: #fff;
     text-decoration: none;
-    margin-left: 24px;
     font-weight: 600;
     font-size: 0.95rem;
+}
+
+.nav-auth-buttons {
+    display: flex;
+    gap: 12px;
+    margin-left: auto;
+}
+
+.nav-btn {
+    padding: 8px 16px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+}
+
+.nav-login {
+    color: #fff;
+    border: 2px solid #fff;
+    background: transparent;
+}
+
+.nav-login:hover {
+    background: #fff;
+    color: #000;
+}
+
+.nav-signup {
+    background: #b3004a;
+    color: #fff;
+    border: 2px solid #b3004a;
+}
+
+.nav-signup:hover {
+    background: #8a0038;
+    border-color: #8a0038;
 }
 
 .hero {
@@ -475,47 +517,61 @@ footer {
 
 .site-footer {
     margin-top: 64px;
-    background: #fff;
-    color: #2b2b2b;
+    background: #1a1a1a;
+    color: #f5f5f5;
 }
 
 .footer-top {
-    border-top: 1px solid #f0e7ea;
-    border-bottom: 1px solid #f0e7ea;
-    padding: 36px 0;
+    border-top: none;
+    border-bottom: 1px solid #333;
+    padding: 32px 0;
+    background: #1a1a1a;
 }
 
 .footer-benefits {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
+    gap: 32px;
     text-align: center;
 }
 
 .benefit-item {
     display: grid;
     justify-items: center;
-    gap: 10px;
+    gap: 12px;
+    padding: 16px;
+    border-radius: 8px;
+    background: #242424;
+    transition: all 0.3s ease;
+}
+
+.benefit-item:hover {
+    background: #2d2d2d;
+    transform: translateY(-4px);
 }
 
 .benefit-icon {
     width: 56px;
     height: 56px;
     border-radius: 50%;
-    border: 1px solid #d9d9d9;
+    border: 2px solid #b3004a;
     display: grid;
     place-items: center;
-    font-size: 1.5rem;
+    font-size: 1.8rem;
+    background: #1a1a1a;
 }
 
 .benefit-text {
-    font-size: 0.72rem;
+    font-size: 0.75rem;
     font-weight: 700;
-    letter-spacing: 0.18em;
+    letter-spacing: 0.16em;
+    color: #e0e0e0;
 }
 
 .footer-newsletter {
-    padding: 54px 0 42px;
+    padding: 48px 0;
+    background: #1a1a1a;
+    border-bottom: 1px solid #333;
 }
 
 .newsletter-grid {
@@ -528,6 +584,8 @@ footer {
 .newsletter-brand {
     font-size: 1.2rem;
     margin-bottom: 10px;
+    color: #b3004a;
+    font-weight: 700;
 }
 
 .newsletter-form h3 {
@@ -535,6 +593,7 @@ footer {
     line-height: 0.95;
     max-width: 8ch;
     margin-bottom: 26px;
+    color: #ffffff;
 }
 
 .newsletter-input-group {
@@ -548,18 +607,31 @@ footer {
     min-width: min(100%, 380px);
     flex: 1;
     padding: 14px 16px;
-    border: 1px solid #d9d9d9;
-    border-radius: 10px;
+    border: 1px solid #444;
+    border-radius: 6px;
     font-size: 1rem;
+    background: #242424;
+    color: #ffffff;
+}
+
+.newsletter-input-group input::placeholder {
+    color: #999;
 }
 
 .btn-subscribe {
-    background: #fff;
-    border: 1px solid #cfcfcf;
-    border-radius: 10px;
-    padding: 12px 18px;
+    background: #b3004a;
+    border: 2px solid #b3004a;
+    border-radius: 6px;
+    padding: 12px 24px;
     font-weight: 700;
     cursor: pointer;
+    color: #fff;
+    transition: all 0.3s ease;
+}
+
+.btn-subscribe:hover {
+    background: #8a0038;
+    border-color: #8a0038;
 }
 
 .newsletter-checkbox {
@@ -570,20 +642,41 @@ footer {
     max-width: 64ch;
     font-size: 0.82rem;
     line-height: 1.5;
-    color: #4f4f4f;
+    color: #bbb;
     margin-bottom: 10px;
+}
+
+.newsletter-checkbox input {
+    margin-top: 4px;
+    accent-color: #b3004a;
 }
 
 .privacy-link a,
 .footer-links a {
-    color: inherit;
+    color: #b3004a;
     text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.privacy-link a:hover,
+.footer-links a:hover {
+    color: #d4006b;
+    text-decoration: underline;
+}
+
+.footer-help {
+    padding: 16px;
+    background: #242424;
+    border-radius: 8px;
 }
 
 .footer-help h4 {
     font-size: 0.8rem;
     letter-spacing: 0.16em;
-    margin-bottom: 12px;
+    margin-bottom: 18px;
+    font-weight: 700;
+    color: #ffffff;
+    text-transform: uppercase;
 }
 
 .footer-links {
@@ -592,8 +685,14 @@ footer {
     gap: 12px;
 }
 
+.footer-links a {
+    font-size: 0.9rem;
+}
+
 .footer-bottom {
-    padding: 0 0 24px;
+    padding: 28px 0;
+    background: #1a1a1a;
+    border-bottom: 1px solid #333;
 }
 
 .footer-bottom-inner {
@@ -603,48 +702,81 @@ footer {
     gap: 24px;
 }
 
+.footer-socials {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
 .footer-socials p {
     font-size: 0.78rem;
     letter-spacing: 0.18em;
     font-weight: 700;
-    margin-bottom: 10px;
+    margin: 0;
+    color: #ffffff;
+    text-transform: uppercase;
 }
 
 .social-links {
     display: flex;
-    gap: 10px;
+    gap: 12px;
     align-items: center;
 }
 
 .social-links a {
-    width: 34px;
-    height: 34px;
+    width: 40px;
+    height: 40px;
     display: grid;
     place-items: center;
     border-radius: 50%;
-    border: 1px solid #d7d7d7;
+    border: 2px solid #b3004a;
     text-decoration: none;
-    color: inherit;
+    color: #b3004a;
+    background: transparent;
+    transition: all 0.3s ease;
+    font-weight: 700;
+}
+
+.social-links a:hover {
+    background: #b3004a;
+    color: #ffffff;
 }
 
 .footer-country {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 16px;
 }
 
 .country-select {
-    border: 1px solid #d9d9d9;
-    border-radius: 999px;
+    border: 2px solid #444;
+    border-radius: 6px;
     padding: 10px 14px;
-    background: #fff;
+    background: #242424;
+    color: #ffffff;
+    font-weight: 600;
+    cursor: pointer;
+    transition: border-color 0.3s ease;
+}
+
+.country-select:hover,
+.country-select:focus {
+    border-color: #b3004a;
+    outline: none;
+}
+
+.currency {
+    font-weight: 700;
+    color: #b3004a;
+    font-size: 0.9rem;
 }
 
 .footer-copyright {
-    padding: 0 0 18px;
+    padding: 20px 0;
     text-align: center;
     font-size: 0.85rem;
-    color: #666;
+    color: #999;
+    background: #0f0f0f;
 }
 
 .footer-icons {
