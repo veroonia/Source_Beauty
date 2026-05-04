@@ -143,7 +143,13 @@
 
         if (addToBagButton) {
             addToBagButton.addEventListener('click', function(){
-                addToBagButton.textContent = 'Added to bag';
+                const shadeCirclesContainer = document.querySelector('.shade-circles');
+                const selectedShade = shadeCirclesContainer?.dataset.selectedShade;
+                const originalText = addToBagButton.textContent;
+                addToBagButton.textContent = selectedShade ? `Added to bag (Shade #${selectedShade})` : 'Added to bag';
+                setTimeout(function() {
+                    addToBagButton.textContent = originalText;
+                }, 2000);
             });
         }
     }
@@ -154,15 +160,44 @@
         if (shadesData) {
             const shades = shadesData.split(',');
             shadeCirclesContainer.innerHTML = '';
-            shades.forEach(function(shadeColor) {
+            let selectedShade = null;
+            
+            shades.forEach(function(shadeColor, index) {
                 const randomNumber = Math.floor(Math.random() * 900) + 100;
                 const circle = document.createElement('div');
                 circle.className = 'shade-circle';
                 circle.style.backgroundColor = shadeColor;
                 circle.textContent = randomNumber;
                 circle.title = `Shade #${randomNumber}`;
+                circle.dataset.shadeNumber = randomNumber;
+                circle.dataset.shadeColor = shadeColor;
+                
+                // Select first shade by default
+                if (index === 0) {
+                    circle.classList.add('selected');
+                    selectedShade = randomNumber;
+                }
+                
+                // Add click handler for shade selection
+                circle.addEventListener('click', function() {
+                    // Remove selected class from all shades
+                    shadeCirclesContainer.querySelectorAll('.shade-circle').forEach(function(s) {
+                        s.classList.remove('selected');
+                    });
+                    // Add selected class to clicked shade
+                    circle.classList.add('selected');
+                    selectedShade = randomNumber;
+                    
+                    // Store selected shade in data attribute
+                    shadeCirclesContainer.dataset.selectedShade = randomNumber;
+                    shadeCirclesContainer.dataset.selectedColor = shadeColor;
+                });
+                
                 shadeCirclesContainer.appendChild(circle);
             });
+            
+            // Store initial selection
+            shadeCirclesContainer.dataset.selectedShade = selectedShade;
         }
     }
 
