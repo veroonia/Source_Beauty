@@ -18,6 +18,9 @@
         lipstick: {
             name: 'Luxury Lipstick',
             price: 25,
+            originalPrice: 1500,
+            salePrice: 750,
+            discount: '50%',
             image: '../images/lipstick.jpg',
             alt: 'Lipstick',
             category: 'Beauty',
@@ -38,6 +41,9 @@
         palette: {
             name: 'Eyeshadow Palette',
             price: 35,
+            originalPrice: 2700,
+            salePrice: 1890,
+            discount: '30%',
             image: '../images/eyeshadow.jpg',
             alt: 'Eyeshadow Palette',
             category: 'Eyes',

@@ -30,7 +30,7 @@
 
     const catalogMeta = {
         'Luxury Lipstick': { category: 'makeup', skintype: ['normal', 'combination'], promotions: ['sale', 'bestseller'], rating: 4.9 },
-        'Silk Foundation': { category: 'makeup', skintype: ['normal', 'dry', 'combination'], promotions: ['sale', 'bestseller'], rating: 4.8 },
+        'Silk Foundation': { category: 'makeup', skintype: ['normal', 'dry', 'combination'], promotions: ['bestseller'], rating: 4.8 },
         'Eyeshadow Palette': { category: 'makeup', skintype: ['normal', 'oily', 'combination'], promotions: ['sale', 'new'], rating: 5.0 },
         'Hydrating Moisturizer': { category: 'skincare', skintype: ['dry', 'sensitive', 'normal'], promotions: ['sale', 'new'], rating: 5.0 },
         'Glow Serum': { category: 'skincare', skintype: ['dry', 'sensitive'], promotions: ['sale'], rating: 4.8 },
@@ -316,8 +316,21 @@
                 }
             }
         }
+        
+        // Handle promotion parameter for offers/discounts
+        const promotionParam = params.get('promotion');
+        if (promotionParam) {
+            const promotionCheckbox = filterCheckboxes.find(function(checkbox) {
+                return checkbox.name === 'promotion' && checkbox.value === promotionParam;
+            });
+            
+            if (promotionCheckbox) {
+                promotionCheckbox.checked = true;
+            }
+        }
+        
+        // Re-apply filters after setting URL parameters
+        syncPriceInput();
+        applyFilters();
     })();
-
-    syncPriceInput();
-    applyFilters();
 })();
