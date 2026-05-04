@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout – Source Beauty</title>
+    <link rel="stylesheet" href="../css/home.css">
+    <link rel="stylesheet" href="../css/cart.css">
+</head>
+<body>
+    <div class="topbar">Free shipping over 1500 EGP • 30-day returns</div>
+
+    <header>
+        <div class="container header-inner">
+            <a href="home.html" class="logo" style="text-decoration:none;color:#fff;">Source Beauty</a>
+            <div id="site-nav"></div>
+        </div>
+    </header>
+
+    <main class="checkout-page">
+        <div class="container">
+
+            <!-- Breadcrumb -->
+            <nav class="cart-breadcrumb" aria-label="breadcrumb">
+                <a href="home.html">Home</a>
+                <span>›</span>
+                <a href="cart.html">Cart</a>
+                <span>›</span>
+                <span class="current">Checkout</span>
+            </nav>
+
+            <!-- Steps indicator -->
+            <div class="checkout-steps">
+                <div class="step done">
+                    <div class="step-circle">✓</div>
+                    <span>Cart</span>
+                </div>
+                <div class="step-line done"></div>
+                <div class="step active">
+                    <div class="step-circle">2</div>
+                    <span>Details</span>
+                </div>
+                <div class="step-line"></div>
+                <div class="step">
+                    <div class="step-circle">3</div>
+                    <span>Payment</span>
+                </div>
+                <div class="step-line"></div>
+                <div class="step">
+                    <div class="step-circle">4</div>
+                    <span>Confirm</span>
+                </div>
+            </div>
+
+            <div class="checkout-layout">
+
+                <!-- ── LEFT: Form ── -->
+                <div class="checkout-form-col">
+
+                    <!-- Contact -->
+                    <section class="checkout-section">
+                        <h2 class="section-heading">
+                            <span class="section-num">1</span> Contact Information
+                        </h2>
+                        <div class="form-grid">
+                            <div class="field-group">
+                                <label for="firstName">First Name *</label>
+                                <input type="text" id="firstName" placeholder="Jane" autocomplete="given-name">
+                                <span class="field-err" id="firstNameErr"></span>
+                            </div>
+                            <div class="field-group">
+                                <label for="lastName">Last Name *</label>
+                                <input type="text" id="lastName" placeholder="Doe" autocomplete="family-name">
+                                <span class="field-err" id="lastNameErr"></span>
+                            </div>
+                            <div class="field-group full">
+                                <label for="email">Email Address *</label>
+                                <input type="email" id="email" placeholder="you@example.com" autocomplete="email">
+                                <span class="field-err" id="emailErr"></span>
+                            </div>
+                            <div class="field-group full">
+                                <label for="phone">Phone Number *</label>
+                                <input type="tel" id="phone" placeholder="+20 100 000 0000" autocomplete="tel">
+                                <span class="field-err" id="phoneErr"></span>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Shipping -->
+                    <section class="checkout-section">
+                        <h2 class="section-heading">
+                            <span class="section-num">2</span> Shipping Address
+                        </h2>
+                        <div class="form-grid">
+                            <div class="field-group full">
+                                <label for="address">Street Address *</label>
+                                <input type="text" id="address" placeholder="123 Nile Street, Apt 4B" autocomplete="street-address">
+                                <span class="field-err" id="addressErr"></span>
+                            </div>
+                            <div class="field-group">
+                                <label for="city">City *</label>
+                                <input type="text" id="city" placeholder="Cairo" autocomplete="address-level2">
+                                <span class="field-err" id="cityErr"></span>
+                            </div>
+                            <div class="field-group">
+                                <label for="governorate">Governorate *</label>
+                                <select id="governorate" autocomplete="address-level1">
+                                    <option value="">Select…</option>
+                                    <option>Cairo</option>
+                                    <option>Giza</option>
+                                    <option>Alexandria</option>
+                                    <option>Luxor</option>
+                                    <option>Aswan</option>
+                                    <option>Mansoura</option>
+                                    <option>Tanta</option>
+                                    <option>Zagazig</option>
+                                    <option>Ismailia</option>
+                                    <option>Suez</option>
+                                    <option>Port Said</option>
+                                    <option>Hurghada</option>
+                                    <option>Sharm El-Sheikh</option>
+                                </select>
+                                <span class="field-err" id="governorateErr"></span>
+                            </div>
+                            <div class="field-group full">
+                                <label for="notes">Order Notes <span class="optional">(optional)</span></label>
+                                <textarea id="notes" rows="3" placeholder="Any special delivery instructions…"></textarea>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Payment -->
+                    <section class="checkout-section">
+                        <h2 class="section-heading">
+                            <span class="section-num">3</span> Payment Method
+                        </h2>
+
+                        <div class="payment-options">
+                            <label class="payment-option active" id="optCOD">
+                                <input type="radio" name="payment" value="cod" checked>
+                                <div class="payment-icon">💵</div>
+                                <div class="payment-text">
+                                    <strong>Cash on Delivery</strong>
+                                    <span>Pay when your order arrives</span>
+                                </div>
+                                <div class="payment-check">✓</div>
+                            </label>
+
+                            <label class="payment-option" id="optCard">
+                                <input type="radio" name="payment" value="card">
+                                <div class="payment-icon">💳</div>
+                                <div class="payment-text">
+                                    <strong>Credit / Debit Card</strong>
+                                    <span>Visa, Mastercard, Meeza</span>
+                                </div>
+                                <div class="payment-check">✓</div>
+                            </label>
+
+                            <label class="payment-option" id="optWallet">
+                                <input type="radio" name="payment" value="wallet">
+                                <div class="payment-icon">📱</div>
+                                <div class="payment-text">
+                                    <strong>Mobile Wallet</strong>
+                                    <span>Vodafone Cash, Fawry, InstaPay</span>
+                                </div>
+                                <div class="payment-check">✓</div>
+                            </label>
+                        </div>
+
+                        <!-- Card fields (shown when card selected) -->
+                        <div class="card-fields" id="cardFields" style="display:none;">
+                            <div class="form-grid">
+                                <div class="field-group full">
+                                    <label for="cardName">Name on Card *</label>
+                                    <input type="text" id="cardName" placeholder="Jane Doe">
+                                </div>
+                                <div class="field-group full">
+                                    <label for="cardNumber">Card Number *</label>
+                                    <input type="text" id="cardNumber" placeholder="0000 0000 0000 0000" maxlength="19">
+                                </div>
+                                <div class="field-group">
+                                    <label for="cardExpiry">Expiry *</label>
+                                    <input type="text" id="cardExpiry" placeholder="MM / YY" maxlength="7">
+                                </div>
+                                <div class="field-group">
+                                    <label for="cardCVV">CVV *</label>
+                                    <input type="text" id="cardCVV" placeholder="•••" maxlength="4">
+                                </div>
+                            </div>
+                        </div>
+
+                    </section>
+
+                    <button class="place-order-btn" id="placeOrderBtn">
+                        Place Order
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                    </button>
+
+                </div>
+
+                <!-- ── RIGHT: Order summary ── -->
+                <aside class="checkout-summary">
+                    <h2 class="summary-title">Your Order</h2>
+
+                    <div id="checkoutItemsList" class="checkout-items-list"></div>
+
+                    <div class="summary-rows">
+                        <div class="summary-row">
+                            <span>Subtotal</span>
+                            <span id="coSubtotal">0 EGP</span>
+                        </div>
+                        <div class="summary-row">
+                            <span>Shipping</span>
+                            <span id="coShipping">Free</span>
+                        </div>
+                        <div class="summary-row" id="coDiscountRow" style="display:none;">
+                            <span>Discount</span>
+                            <span id="coDiscount" class="discount-val"></span>
+                        </div>
+                    </div>
+
+                    <div class="summary-total">
+                        <span>Total</span>
+                        <span id="coTotal">0 EGP</span>
+                    </div>
+
+                    <!-- Trust badges -->
+                    <div class="trust-badges" style="margin-top:20px;">
+                        <div class="trust-item"><span>🔒</span> SSL Secured</div>
+                        <div class="trust-item"><span>↩️</span> 30-Day Returns</div>
+                        <div class="trust-item"><span>🚚</span> Fast Delivery</div>
+                    </div>
+                </aside>
+
+            </div><!-- end checkout-layout -->
+
+        </div>
+    </main>
+
+    <!-- Order success overlay -->
+    <div class="order-success-overlay" id="orderSuccess" style="display:none;">
+        <div class="order-success-card">
+            <div class="success-icon">✓</div>
+            <h2>Order Placed!</h2>
+            <p>Thank you for your order. We'll send a confirmation to your email shortly.</p>
+            <p class="order-ref" id="orderRef"></p>
+            <a href="home.html" class="btn-fill" style="margin-top:24px;">Back to Home</a>
+        </div>
+    </div>
+
+    <div id="site-footer"></div>
+
+    <script src="../js/home.js" defer></script>
+    <script src="../js/cart.js" defer></script>
+    <script src="../js/checkout.js" defer></script>
+</body>
+</html>

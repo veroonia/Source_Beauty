@@ -859,3 +859,55 @@ footer {
 .nav-login-icon svg {
     display: block;
 }
+
+/* ── Cart icon in nav ── */
+.nav-cart-icon {
+    display: inline-flex;
+    align-items: center;
+    position: relative;
+    color: #fff;
+    transition: color 0.2s;
+    margin-left: 8px;
+}
+
+.nav-cart-icon:hover { color: #f8a4c8; }
+
+.cart-nav-badge {
+    position: absolute;
+    top: -7px;
+    right: -8px;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: #b3004a;
+    color: #fff;
+    font-size: 0.65rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #000;
+    pointer-events: none;
+}
+
+/* ── Add to Cart button on product cards ── */
+.add-to-cart-btn {
+    display: block;
+    width: calc(100% - 32px);
+    margin: 0 16px 16px;
+    padding: 10px;
+    background: #b3004a;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.15s;
+    text-align: center;
+}
+
+.add-to-cart-btn:hover {
+    background: #8c0039;
+    transform: translateY(-1px);
+}
