@@ -127,6 +127,7 @@
     display: flex;
     flex-direction: column;
     gap: 12px;
+    position: relative;
 }
 
 .price-slider {
@@ -137,6 +138,23 @@
     outline: none;
     -webkit-appearance: none;
     cursor: pointer;
+    position: relative;
+}
+
+.price-slider::-webkit-slider-runnable-track {
+    height: 6px;
+    border-radius: 3px;
+    background: #e0e0e0;
+}
+
+.price-slider::-moz-range-track {
+    height: 6px;
+    border-radius: 3px;
+    background: #e0e0e0;
+}
+
+.price-slider:focus {
+    outline: none;
 }
 
 .price-slider::-webkit-slider-thumb {
@@ -148,6 +166,7 @@
     background: #b3004a;
     cursor: pointer;
     box-shadow: 0 2px 6px rgba(179, 0, 74, 0.3);
+    margin-top: -5px;
 }
 
 .price-slider::-moz-range-thumb {
@@ -158,6 +177,30 @@
     cursor: pointer;
     border: none;
     box-shadow: 0 2px 6px rgba(179, 0, 74, 0.3);
+}
+
+.apply-filters-btn {
+    width: 100%;
+    margin-top: 4px;
+    padding: 12px 16px;
+    border: none;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #b3004a 0%, #7e0034 100%);
+    color: #fff;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+    box-shadow: 0 10px 24px rgba(179, 0, 74, 0.18);
+}
+
+.apply-filters-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 14px 28px rgba(179, 0, 74, 0.22);
+}
+
+.apply-filters-btn:active {
+    transform: translateY(0);
+    opacity: 0.96;
 }
 
 .price-inputs {
@@ -179,6 +222,24 @@
 .price-inputs span {
     color: #999;
     font-size: 0.9rem;
+}
+
+.results-count {
+    font-weight: 600;
+    color: #333;
+}
+
+.product-card.is-hidden {
+    display: none;
+}
+
+.no-results {
+    padding: 24px;
+    background: #fff;
+    border: 1px dashed #e2c3d0;
+    border-radius: 12px;
+    color: #6b4d5a;
+    text-align: center;
 }
 
 /* ═══════════════ MAIN PRODUCTS AREA ═══════════════ */
@@ -212,6 +273,12 @@
     font-weight: 600;
     color: #333;
     font-size: 0.9rem;
+}
+
+.active-filter-status {
+    color: #777;
+    font-size: 0.9rem;
+    font-weight: 600;
 }
 
 .filter-tags {
