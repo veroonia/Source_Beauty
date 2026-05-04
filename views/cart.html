@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Cart – Source Beauty</title>
+    <link rel="stylesheet" href="../css/home.css">
+    <link rel="stylesheet" href="../css/cart.css">
+</head>
+<body>
+    <div class="topbar">Free shipping over 1500 EGP • 30-day returns</div>
+
+    <header>
+        <div class="container header-inner">
+            <a href="home.html" class="logo" style="text-decoration:none;color:#fff;">Source Beauty</a>
+            <div id="site-nav"></div>
+        </div>
+    </header>
+
+    <main class="cart-page">
+        <div class="container">
+
+            <!-- Breadcrumb -->
+            <nav class="cart-breadcrumb" aria-label="breadcrumb">
+                <a href="home.html">Home</a>
+                <span>›</span>
+                <span class="current">Shopping Cart</span>
+            </nav>
+
+            <h1 class="cart-heading">Shopping Cart <span class="cart-count-label" id="cartCountLabel"></span></h1>
+
+            <!-- Empty state -->
+            <div class="cart-empty" id="cartEmpty" style="display:none;">
+                <div class="empty-icon">🛍️</div>
+                <h2>Your cart is empty</h2>
+                <p>Looks like you haven't added anything yet.</p>
+                <a href="products.html" class="btn-fill">Start Shopping</a>
+            </div>
+
+            <!-- Cart layout -->
+            <div class="cart-layout" id="cartLayout">
+
+                <!-- Items column -->
+                <section class="cart-items-col">
+                    <div class="cart-items-header">
+                        <span>Product</span>
+                        <span>Price</span>
+                        <span>Qty</span>
+                        <span>Total</span>
+                        <span></span>
+                    </div>
+                    <div id="cartItemsList"></div>
+                </section>
+
+                <!-- Summary column -->
+                <aside class="cart-summary">
+                    <h2 class="summary-title">Order Summary</h2>
+
+                    <div class="summary-rows">
+                        <div class="summary-row">
+                            <span>Subtotal</span>
+                            <span id="summarySubtotal">0 EGP</span>
+                        </div>
+                        <div class="summary-row">
+                            <span>Shipping</span>
+                            <span id="summaryShipping">Free</span>
+                        </div>
+                        <div class="summary-row promo-row">
+                            <span>Promo Code</span>
+                            <span id="summaryDiscount" class="discount-val">—</span>
+                        </div>
+                    </div>
+
+                    <!-- Promo code -->
+                    <div class="promo-wrap">
+                        <input type="text" id="promoInput" placeholder="Enter promo code" class="promo-input">
+                        <button class="promo-btn" id="promoBtn">Apply</button>
+                    </div>
+                    <p class="promo-msg" id="promoMsg"></p>
+
+                    <div class="summary-total">
+                        <span>Total</span>
+                        <span id="summaryTotal">0 EGP</span>
+                    </div>
+
+                    <a href="checkout.html" class="checkout-btn" id="checkoutBtn">
+                        Proceed to Checkout
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                    </a>
+
+                    <a href="products.html" class="continue-link">← Continue Shopping</a>
+
+                    <!-- Trust badges -->
+                    <div class="trust-badges">
+                        <div class="trust-item">
+                            <span>🔒</span> Secure Checkout
+                        </div>
+                        <div class="trust-item">
+                            <span>↩️</span> 30-Day Returns
+                        </div>
+                        <div class="trust-item">
+                            <span>🚚</span> Fast Delivery
+                        </div>
+                    </div>
+                </aside>
+
+            </div><!-- end cart-layout -->
+
+        </div>
+    </main>
+
+    <div id="site-footer"></div>
+
+    <script src="../js/home.js" defer></script>
+    <script src="../js/cart.js" defer></script>
+</body>
+</html>
