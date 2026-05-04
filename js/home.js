@@ -18,7 +18,7 @@
         lipstick: {
             name: 'Luxury Lipstick',
             price: 25,
-            image: 'images/lipstick.jpg',
+            image: '../images/lipstick.jpg',
             alt: 'Lipstick',
             category: 'Beauty',
             description: 'Rich color with a smooth, comfortable finish. Perfect for everyday wear or a night out.',
@@ -28,7 +28,7 @@
         foundation: {
             name: 'Silk Foundation',
             price: 40,
-            image: 'images/foundation.jpg',
+            image: '../images/foundation.jpg',
             alt: 'Foundation',
             category: 'Complexion',
             description: 'Lightweight coverage with a natural satin finish that blends seamlessly.',
@@ -38,7 +38,7 @@
         palette: {
             name: 'Eyeshadow Palette',
             price: 35,
-            image: 'images/eyeshadow.jpg',
+            image: '../images/eyeshadow.jpg',
             alt: 'Eyeshadow Palette',
             category: 'Eyes',
             description: 'A versatile palette with soft mattes and luminous metallic shades.',
