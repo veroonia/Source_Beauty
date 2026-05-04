@@ -136,6 +136,8 @@ header {
     border: none;
     border-radius: 2px;
     cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
 }
 
 .btn-outline {
@@ -145,6 +147,8 @@ header {
     padding: 10px 16px;
     border-radius: 2px;
     cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
 }
 
 .products {
@@ -308,6 +312,18 @@ footer {
     font-weight: 700;
 }
 
+/* Shop by product link styles */
+.shop-by-product-link {
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+}
+
+.shop-by-product-link:hover h4,
+.shop-by-product-link:focus h4 {
+    color: #b3004a;
+}
+
 /* Product detail page */
 .product-page {
     min-height: 100vh;
@@ -445,6 +461,11 @@ footer {
 .shade-circle:hover {
     transform: scale(1.1);
     box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+}
+
+.shade-circle.selected {
+    border: 3px solid #b3004a;
+    box-shadow: 0 0 0 2px #fff, 0 0 0 4px #b3004a, 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 /* Sale banner */

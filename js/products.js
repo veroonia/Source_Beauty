@@ -30,7 +30,7 @@
 
     const catalogMeta = {
         'Luxury Lipstick': { category: 'makeup', skintype: ['normal', 'combination'], promotions: ['sale', 'bestseller'], rating: 4.9 },
-        'Silk Foundation': { category: 'makeup', skintype: ['normal', 'dry', 'combination'], promotions: ['sale', 'bestseller'], rating: 4.8 },
+        'Silk Foundation': { category: 'makeup', skintype: ['normal', 'dry', 'combination'], promotions: ['bestseller'], rating: 4.8 },
         'Eyeshadow Palette': { category: 'makeup', skintype: ['normal', 'oily', 'combination'], promotions: ['sale', 'new'], rating: 5.0 },
         'Hydrating Moisturizer': { category: 'skincare', skintype: ['dry', 'sensitive', 'normal'], promotions: ['sale', 'new'], rating: 5.0 },
         'Glow Serum': { category: 'skincare', skintype: ['dry', 'sensitive'], promotions: ['sale'], rating: 4.8 },
@@ -276,6 +276,61 @@
         });
     });
 
-    syncPriceInput();
-    applyFilters();
+    // ─── Handle URL parameters for product name & category filtering ───
+    (function() {
+        const params = new URLSearchParams(window.location.search);
+        const categoryParam = params.get('category');
+        
+        if (categoryParam) {
+            // List of specific product types for name-based filtering
+            const productNameFilters = ['lipstick', 'foundation', 'palette', 'brush', 'serum', 'balm', 'mist', 'pencil', 'gel', 'cream'];
+            
+            // Check if the parameter is a specific product name
+            if (productNameFilters.includes(categoryParam.toLowerCase())) {
+                // Filter by product name AND makeup category
+                const searchTerm = categoryParam.toLowerCase();
+                
+                // Find and check the makeup category checkbox
+                const makeupCheckbox = filterCheckboxes.find(function(checkbox) {
+                    return checkbox.name === 'category' && checkbox.value === 'makeup';
+                });
+                
+                if (makeupCheckbox) {
+                    makeupCheckbox.checked = true;
+                }
+                
+                // Also filter by product name in the cards
+                productCards.forEach(function(card) {
+                    const productName = card.querySelector('.product-name')?.textContent.trim().toLowerCase() || '';
+                    const shouldShow = productName.includes(searchTerm);
+                    card.style.display = shouldShow ? '' : 'none';
+                });
+            } else {
+                // Filter by general category - use checkbox filtering
+                const categoryCheckbox = filterCheckboxes.find(function(checkbox) {
+                    return checkbox.name === 'category' && checkbox.value === categoryParam;
+                });
+                
+                if (categoryCheckbox) {
+                    categoryCheckbox.checked = true;
+                }
+            }
+        }
+        
+        // Handle promotion parameter for offers/discounts
+        const promotionParam = params.get('promotion');
+        if (promotionParam) {
+            const promotionCheckbox = filterCheckboxes.find(function(checkbox) {
+                return checkbox.name === 'promotion' && checkbox.value === promotionParam;
+            });
+            
+            if (promotionCheckbox) {
+                promotionCheckbox.checked = true;
+            }
+        }
+        
+        // Re-apply filters after setting URL parameters
+        syncPriceInput();
+        applyFilters();
+    })();
 })();
