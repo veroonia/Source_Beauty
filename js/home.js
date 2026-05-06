@@ -232,6 +232,46 @@
     const productCategory = document.querySelector('[data-product-category]');
     const productHighlights = document.querySelector('[data-product-highlights]');
     const addToBagButton = document.querySelector('[data-action="add-to-bag"]');
+    const relatedProductsContainer = document.querySelector('[data-related-products]');
+
+    function formatEgp(value) {
+        return Number(value || 0).toLocaleString('en-EG') + ' EGP';
+    }
+
+    function renderRelatedProducts(activeId, activeProduct) {
+        if (!relatedProductsContainer) return;
+
+        const allProducts = Object.entries(productCatalog);
+        const sameCategory = allProducts.filter(function(entry) {
+            const id = entry[0];
+            const product = entry[1];
+            return id !== activeId && product.category === activeProduct.category;
+        });
+
+        const fallback = allProducts.filter(function(entry) {
+            return entry[0] !== activeId;
+        });
+
+        const picks = (sameCategory.length >= 3 ? sameCategory : sameCategory.concat(fallback))
+            .slice(0, 3);
+
+        relatedProductsContainer.innerHTML = '';
+        picks.forEach(function(entry) {
+            const id = entry[0];
+            const product = entry[1];
+            const card = document.createElement('a');
+            card.className = 'related-product-card';
+            card.href = 'product.html?product=' + encodeURIComponent(id);
+            card.innerHTML =
+                '<img src="' + product.image + '" alt="' + product.alt + '">' +
+                '<div class="related-product-copy">' +
+                    '<h4>' + product.name + '</h4>' +
+                    '<p>' + product.category + '</p>' +
+                    '<span class="related-price">' + formatEgp(product.salePrice || product.price) + '</span>' +
+                '</div>';
+            relatedProductsContainer.appendChild(card);
+        });
+    }
 
     if (productName && productPrice && productDescription && productImage) {
         const params = new URLSearchParams(window.location.search);
@@ -269,6 +309,8 @@
                 }, 2000);
             });
         }
+
+        renderRelatedProducts(productId, product);
     }
 
     const shadeCirclesContainer = document.querySelector('.shade-circles');
