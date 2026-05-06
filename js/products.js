@@ -28,6 +28,21 @@
     const filterTagContainer = document.querySelector('.filter-tags');
     const defaultPriceMax = 3000;
 
+    const productIdByName = {
+        'Luxury Lipstick': 'lipstick',
+        'Silk Foundation': 'foundation',
+        'Eyeshadow Palette': 'palette',
+        'Hydrating Moisturizer': 'moisturizer',
+        'Glow Serum': 'serum',
+        'Smooth Body Cream': 'smooth-body-cream',
+        'Essence Body Gel': 'essence-body-gel',
+        'Luxe Lipgloss': 'lipgloss',
+        'Precision Brow Pencil': 'precision-brow-pencil',
+        'Silk Hair Serum': 'silk-hair-serum',
+        'Nourishing Lip Balm': 'nourishing-lip-balm',
+        'Refreshing Face Mist': 'refreshing-face-mist'
+    };
+
     const catalogMeta = {
         'Luxury Lipstick': { category: 'makeup', skintype: ['normal', 'combination'], promotions: ['sale', 'bestseller'], rating: 4.9 },
         'Silk Foundation': { category: 'makeup', skintype: ['normal', 'dry', 'combination'], promotions: ['bestseller'], rating: 4.8 },
@@ -59,6 +74,12 @@
             skintype: base.skintype || ['normal'],
             promotions: base.promotions || (card.querySelector('.discount-badge') ? ['sale'] : [])
         };
+    }
+
+    function toProductId(name) {
+        if (!name) return 'lipstick';
+        if (productIdByName[name]) return productIdByName[name];
+        return name.trim().toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
     }
 
     function syncPriceInput() {
@@ -231,8 +252,19 @@
     wishlistBtns.forEach(btn => {
         btn.addEventListener('click', function(e) {
             e.preventDefault();
+            e.stopPropagation();
             this.textContent = this.textContent === '♡' ? '♥' : '♡';
             this.classList.toggle('active');
+        });
+    });
+
+    // Product card click to product details page
+    productCards.forEach(function(card) {
+        card.style.cursor = 'pointer';
+        card.addEventListener('click', function() {
+            const productName = card.querySelector('.product-name')?.textContent.trim() || '';
+            const productId = toProductId(productName);
+            window.location.href = 'product.html?product=' + encodeURIComponent(productId);
         });
     });
 

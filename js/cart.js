@@ -62,6 +62,48 @@ var SB_PRODUCTS = {
         price: 600,
         image: '../images/lipstick.jpg',
         category: 'Makeup'
+    },
+    'smooth-body-cream': {
+        id: 'smooth-body-cream',
+        name: 'Smooth Body Cream',
+        price: 900,
+        image: '../images/eyeshadow.jpg',
+        category: 'Body Care'
+    },
+    'essence-body-gel': {
+        id: 'essence-body-gel',
+        name: 'Essence Body Gel',
+        price: 900,
+        image: '../images/foundation.jpg',
+        category: 'Body Care'
+    },
+    'precision-brow-pencil': {
+        id: 'precision-brow-pencil',
+        name: 'Precision Brow Pencil',
+        price: 300,
+        image: '../images/eyeshadow.jpg',
+        category: 'Makeup'
+    },
+    'silk-hair-serum': {
+        id: 'silk-hair-serum',
+        name: 'Silk Hair Serum',
+        price: 630,
+        image: '../images/foundation.jpg',
+        category: 'Hair Care'
+    },
+    'nourishing-lip-balm': {
+        id: 'nourishing-lip-balm',
+        name: 'Nourishing Lip Balm',
+        price: 360,
+        image: '../images/lipstick.jpg',
+        category: 'Makeup'
+    },
+    'refreshing-face-mist': {
+        id: 'refreshing-face-mist',
+        name: 'Refreshing Face Mist',
+        price: 429,
+        image: '../images/eyeshadow.jpg',
+        category: 'Skincare'
     }
 };
 
