@@ -23,63 +23,98 @@
     const resultsCount = document.getElementById('resultsCount');
     const activeFilterStatus = document.getElementById('activeFilterStatus');
     const productsGrid = document.querySelector('.products-grid');
-    const productCards = Array.from(document.querySelectorAll('.product-card'));
+    let productCards = [];
     const filterCheckboxes = Array.from(document.querySelectorAll('.filter-checkbox input'));
     const filterTagContainer = document.querySelector('.filter-tags');
     const defaultPriceMax = 3000;
+    let forcedProductId = null;
 
-    const productIdByName = {
-        'Luxury Lipstick': 'lipstick',
-        'Silk Foundation': 'foundation',
-        'Eyeshadow Palette': 'palette',
-        'Hydrating Moisturizer': 'moisturizer',
-        'Glow Serum': 'serum',
-        'Smooth Body Cream': 'smooth-body-cream',
-        'Essence Body Gel': 'essence-body-gel',
-        'Luxe Lipgloss': 'lipgloss',
-        'Precision Brow Pencil': 'precision-brow-pencil',
-        'Silk Hair Serum': 'silk-hair-serum',
-        'Nourishing Lip Balm': 'nourishing-lip-balm',
-        'Refreshing Face Mist': 'refreshing-face-mist'
+    const productData = window.SB_PRODUCT_DATA || {
+        catalog: {},
+        getProductIdByName: function (name) {
+            return String(name || '')
+                .trim()
+                .toLowerCase()
+                .replace(/[^a-z0-9]+/g, '-')
+                .replace(/^-+|-+$/g, '');
+        },
+        getProductByName: function () {
+            return null;
+        }
     };
+    const productCatalog = productData.catalog || {};
 
-    const catalogMeta = {
-        'Luxury Lipstick': { category: 'makeup', skintype: ['normal', 'combination'], promotions: ['sale', 'bestseller'], rating: 4.9 },
-        'Silk Foundation': { category: 'makeup', skintype: ['normal', 'dry', 'combination'], promotions: ['bestseller'], rating: 4.8 },
-        'Eyeshadow Palette': { category: 'makeup', skintype: ['normal', 'oily', 'combination'], promotions: ['sale', 'new'], rating: 5.0 },
-        'Hydrating Moisturizer': { category: 'skincare', skintype: ['dry', 'sensitive', 'normal'], promotions: ['sale', 'new'], rating: 5.0 },
-        'Glow Serum': { category: 'skincare', skintype: ['dry', 'sensitive'], promotions: ['sale'], rating: 4.8 },
-        'Smooth Body Cream': { category: 'bodycare', skintype: ['dry', 'sensitive', 'normal'], promotions: ['sale'], rating: 5.0 },
-        'Essence Body Gel': { category: 'bodycare', skintype: ['oily', 'normal'], promotions: ['sale'], rating: 4.8 },
-        'Luxe Lipgloss': { category: 'makeup', skintype: ['normal', 'combination'], promotions: ['sale', 'bestseller'], rating: 4.9 },
-        'Precision Brow Pencil': { category: 'makeup', skintype: ['normal', 'oily'], promotions: ['sale', 'bestseller'], rating: 5.0 },
-        'Silk Hair Serum': { category: 'haircare', skintype: ['normal', 'dry'], promotions: ['sale'], rating: 4.9 },
-        'Nourishing Lip Balm': { category: 'makeup', skintype: ['dry', 'sensitive', 'normal'], promotions: ['sale', 'new'], rating: 4.7 },
-        'Refreshing Face Mist': { category: 'skincare', skintype: ['oily', 'sensitive', 'normal'], promotions: ['sale', 'new'], rating: 4.8 }
-    };
+    function formatPrice(value) {
+        return Number(value || 0).toLocaleString('en-EG') + ' EGP';
+    }
+
+    function getStars(rating) {
+        return rating >= 4.95 ? '★★★★★' : '★★★★☆';
+    }
+
+    function renderProductCards() {
+        if (!productsGrid) return;
+
+        var products = Object.keys(productCatalog).map(function (id) {
+            return productCatalog[id];
+        });
+
+        productsGrid.innerHTML = '';
+
+        products.forEach(function (product) {
+            var card = document.createElement('div');
+            card.className = 'product-card';
+            card.dataset.productId = product.id;
+            card.innerHTML =
+                '<div class="product-image-wrapper">' +
+                    '<img src="' + product.image + '" alt="' + product.alt + '" class="product-image">' +
+                    (product.discount ? '<span class="discount-badge">' + product.discount + ' off</span>' : '') +
+                    '<button class="wishlist-btn">♡</button>' +
+                '</div>' +
+                '<div class="product-info">' +
+                    '<span class="product-category">' + product.category + '</span>' +
+                    '<h3 class="product-name">' + product.name + '</h3>' +
+                    '<div class="product-rating">' +
+                        '<span class="stars">' + getStars(product.rating) + '</span>' +
+                        '<span class="rating-number">' + Number(product.rating || 0).toFixed(1) + '</span>' +
+                    '</div>' +
+                    '<div class="product-price">' +
+                        (product.originalPrice ? '<span class="original-price">' + formatPrice(product.originalPrice) + '</span>' : '') +
+                        '<span class="sale-price">' + formatPrice(product.salePrice || product.price) + '</span>' +
+                    '</div>' +
+                '</div>';
+            productsGrid.appendChild(card);
+        });
+
+        productCards = Array.from(productsGrid.querySelectorAll('.product-card'));
+        if (resultsCount) {
+            resultsCount.textContent = String(productCards.length);
+        }
+    }
+
+    renderProductCards();
 
     function getCardMeta(card) {
-        const name = card.querySelector('.product-name')?.textContent.trim() || '';
         const priceText = card.querySelector('.sale-price')?.textContent || '';
         const price = parseInt(priceText.replace(/[^0-9]/g, ''), 10) || 0;
         const ratingText = card.querySelector('.rating-number')?.textContent || '';
-        const rating = parseFloat(ratingText) || (catalogMeta[name]?.rating ?? 0);
-        const base = catalogMeta[name] || {};
+        const productId = card.dataset.productId || '';
+        const product = productCatalog[productId] || (productData.getProductByName ? productData.getProductByName(card.querySelector('.product-name')?.textContent.trim() || '') : null);
+        const rating = (product && product.rating) || parseFloat(ratingText) || 0;
 
         return {
-            name,
-            price,
+            name: product ? product.name : (card.querySelector('.product-name')?.textContent.trim() || ''),
+            price: product ? (product.salePrice || product.price || price) : price,
             rating,
-            category: base.category || (card.querySelector('.product-category')?.textContent.trim().toLowerCase().replace(/\s+/g, '') || ''),
-            skintype: base.skintype || ['normal'],
-            promotions: base.promotions || (card.querySelector('.discount-badge') ? ['sale'] : [])
+            category: (product && (product.categoryKey || product.category.toLowerCase().replace(/\s+/g, ''))) || (card.querySelector('.product-category')?.textContent.trim().toLowerCase().replace(/\s+/g, '') || ''),
+            skintype: (product && product.skintype) || ['normal'],
+            promotions: (product && product.promotions) || (card.querySelector('.discount-badge') ? ['sale'] : [])
         };
     }
 
     function toProductId(name) {
         if (!name) return 'lipstick';
-        if (productIdByName[name]) return productIdByName[name];
-        return name.trim().toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+        return productData.getProductIdByName ? productData.getProductIdByName(name) : name.trim().toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
     }
 
     function syncPriceInput() {
@@ -195,8 +230,9 @@
             const matchesCategory = activeFilters.categories.length === 0 || activeFilters.categories.includes(meta.category);
             const matchesSkinType = activeFilters.skinTypes.length === 0 || activeFilters.skinTypes.some(function (skinType) { return meta.skintype.includes(skinType); });
             const matchesPromotion = activeFilters.promotions.length === 0 || activeFilters.promotions.every(function (promotion) { return meta.promotions.includes(promotion); });
+            const matchesForcedProduct = !forcedProductId || card.dataset.productId === forcedProductId;
 
-            const isVisible = matchesPrice && matchesCategory && matchesSkinType && matchesPromotion;
+            const isVisible = matchesPrice && matchesCategory && matchesSkinType && matchesPromotion && matchesForcedProduct;
             card.classList.toggle('is-hidden', !isVisible);
             if (isVisible) {
                 visibleCards.push({ card, meta });
@@ -247,30 +283,29 @@
         applyFiltersBtn.addEventListener('click', applyFilters);
     }
 
-    // Wishlist Button
-    const wishlistBtns = document.querySelectorAll('.wishlist-btn');
-    wishlistBtns.forEach(btn => {
-        btn.addEventListener('click', function(e) {
-            e.preventDefault();
-            e.stopPropagation();
-            this.textContent = this.textContent === '♡' ? '♥' : '♡';
-            this.classList.toggle('active');
-        });
-    });
+    if (productsGrid) {
+        productsGrid.addEventListener('click', function (e) {
+            const wishlistBtn = e.target.closest('.wishlist-btn');
+            if (wishlistBtn && productsGrid.contains(wishlistBtn)) {
+                e.preventDefault();
+                e.stopPropagation();
+                wishlistBtn.textContent = wishlistBtn.textContent === '♡' ? '♥' : '♡';
+                wishlistBtn.classList.toggle('active');
+                return;
+            }
 
-    // Product card click to product details page
-    productCards.forEach(function(card) {
-        card.style.cursor = 'pointer';
-        card.addEventListener('click', function() {
-            const productName = card.querySelector('.product-name')?.textContent.trim() || '';
-            const productId = toProductId(productName);
+            const card = e.target.closest('.product-card');
+            if (!card || !productsGrid.contains(card)) return;
+
+            const productId = card.dataset.productId || toProductId(card.querySelector('.product-name')?.textContent.trim() || '');
             window.location.href = 'product.html?product=' + encodeURIComponent(productId);
         });
-    });
+    }
 
     if (clearFiltersBtn) {
         clearFiltersBtn.addEventListener('click', function(e) {
             e.preventDefault();
+            forcedProductId = null;
             filterCheckboxes.forEach(checkbox => checkbox.checked = false);
             if (priceSlider) priceSlider.value = String(defaultPriceMax);
             syncPriceInput();
@@ -314,29 +349,8 @@
         const categoryParam = params.get('category');
         
         if (categoryParam) {
-            // List of specific product types for name-based filtering
-            const productNameFilters = ['lipstick', 'foundation', 'palette', 'brush', 'serum', 'balm', 'mist', 'pencil', 'gel', 'cream'];
-            
-            // Check if the parameter is a specific product name
-            if (productNameFilters.includes(categoryParam.toLowerCase())) {
-                // Filter by product name AND makeup category
-                const searchTerm = categoryParam.toLowerCase();
-                
-                // Find and check the makeup category checkbox
-                const makeupCheckbox = filterCheckboxes.find(function(checkbox) {
-                    return checkbox.name === 'category' && checkbox.value === 'makeup';
-                });
-                
-                if (makeupCheckbox) {
-                    makeupCheckbox.checked = true;
-                }
-                
-                // Also filter by product name in the cards
-                productCards.forEach(function(card) {
-                    const productName = card.querySelector('.product-name')?.textContent.trim().toLowerCase() || '';
-                    const shouldShow = productName.includes(searchTerm);
-                    card.style.display = shouldShow ? '' : 'none';
-                });
+            if (productCatalog[categoryParam]) {
+                forcedProductId = categoryParam;
             } else {
                 // Filter by general category - use checkbox filtering
                 const categoryCheckbox = filterCheckboxes.find(function(checkbox) {
