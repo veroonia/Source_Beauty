@@ -90,6 +90,9 @@
         if (resultsCount) {
             resultsCount.textContent = String(productCards.length);
         }
+        // Initialize skintone picker and recommendations after cards rendered
+        initSkintonePicker();
+        updateRecommendations();
     }
 
     renderProductCards();
@@ -250,6 +253,9 @@
 
         renderActiveFilterTags(activeFilters);
 
+        // Update recommendations for visible cards
+        updateRecommendations();
+
         let emptyState = productsGrid.querySelector('.no-results');
         if (sortedVisibleCards.length === 0) {
             if (!emptyState) {
@@ -261,6 +267,71 @@
         } else if (emptyState) {
             emptyState.remove();
         }
+    }
+
+    // ----------------- Skintone recommendation helpers -----------------
+    function getUserSkintone() {
+        return localStorage.getItem('userSkintone') || null;
+    }
+
+    function setUserSkintone(value) {
+        if (value) localStorage.setItem('userSkintone', value);
+        else localStorage.removeItem('userSkintone');
+        updateRecommendations();
+    }
+
+    function initSkintonePicker() {
+        var picker = document.getElementById('skintonePicker');
+        if (!picker) return;
+        var current = getUserSkintone();
+        var inputs = picker.querySelectorAll('input[name="skintone"]');
+        inputs.forEach(function (inp) {
+            inp.checked = (inp.value === current);
+            inp.addEventListener('change', function () {
+                if (this.checked) setUserSkintone(this.value);
+            });
+        });
+    }
+
+    function findShadeIndexForSkintone(product, skintone) {
+        if (!product || !product.shades || !product.shades.length) return -1;
+        var n = product.shades.length;
+        var bucketSize = Math.ceil(n / 3);
+        var start = { light: 0, medium: bucketSize, dark: 2 * bucketSize };
+        var idx = start[skintone] || 0;
+        if (idx >= n) idx = n - 1;
+        return idx;
+    }
+
+    function updateRecommendations() {
+        var user = getUserSkintone();
+        productCards.forEach(function (card) {
+            // remove old badge
+            var old = card.querySelector('.recommended-badge');
+            if (old) old.remove();
+            card.classList.remove('recommended');
+
+            if (!user) return; // nothing to recommend
+
+            var productId = card.dataset.productId;
+            var product = productCatalog[productId] || null;
+            if (!product) return;
+            var idx = findShadeIndexForSkintone(product, user);
+            if (idx < 0 || !product.shades || !product.shades[idx]) return;
+
+            var badge = document.createElement('div');
+            badge.className = 'recommended-badge';
+            var sw = document.createElement('span');
+            sw.className = 'badge-swatch';
+            sw.style.background = product.shades[idx];
+            badge.appendChild(sw);
+            var txt = document.createElement('span');
+            txt.textContent = 'Recommended for you';
+            badge.appendChild(txt);
+            var info = card.querySelector('.product-info');
+            if (info) info.insertBefore(badge, info.firstChild);
+            card.classList.add('recommended');
+        });
     }
 
     if (priceSlider) {
