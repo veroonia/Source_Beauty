@@ -26,9 +26,15 @@ document.addEventListener('DOMContentLoaded', function () {
     var shadesContainer = document.querySelector('[data-shades]');
     if (!shadesContainer) return;
 
+    // if no shades available, hide the entire section
+    if (!product.shades || !product.shades.length) {
+        var section = shadesContainer.closest('.shade-section');
+        if (section) section.style.display = 'none';
+        return;
+    }
+
     // render shades
     shadesContainer.innerHTML = '';
-    product.shades = product.shades || [];
     product.shades.forEach(function (shade, i) {
         var btn = document.createElement('button');
         btn.className = 'shade-dot';
@@ -41,18 +47,41 @@ document.addEventListener('DOMContentLoaded', function () {
         btn.style.border = '1px solid #ccc';
         btn.style.marginRight = '8px';
         btn.dataset.index = String(i);
+        btn.setAttribute('aria-pressed', 'false');
+        btn.addEventListener('click', function () {
+            selectShade(parseInt(this.dataset.index, 10));
+        });
         shadesContainer.appendChild(btn);
     });
 
-    // highlight recommended shade
+    // helper to mark a shade selected (user choice)
+    function selectShade(idx) {
+        var buttons = shadesContainer.querySelectorAll('button.shade-dot');
+        buttons.forEach(function (b) {
+            var isSelected = String(b.dataset.index) === String(idx);
+            b.classList.toggle('selected', isSelected);
+            b.setAttribute('aria-pressed', isSelected ? 'true' : 'false');
+            if (isSelected) {
+                b.style.boxShadow = '0 2px 8px rgba(0,0,0,.12)';
+                b.style.outline = '2px solid rgba(0,0,0,0.08)';
+            } else {
+                b.style.boxShadow = 'none';
+                b.style.outline = 'none';
+            }
+        });
+        shadesContainer.dataset.selected = String(idx);
+    }
+
+    // highlight recommended shade (non-blocking)
     var user = getUserSkintone();
     if (user) {
         var recIdx = findShadeIndexForSkintone(product, user);
         var recBtn = shadesContainer.querySelector('button[data-index="' + recIdx + '"]');
         if (recBtn) {
             recBtn.classList.add('recommended');
-            recBtn.style.boxShadow = '0 2px 8px rgba(0,0,0,.12)';
-            recBtn.style.outline = '2px solid rgba(255,200,120,.6)';
+            // visual cue, but keep it selectable
+            recBtn.style.boxShadow = recBtn.style.boxShadow || '0 2px 8px rgba(0,0,0,.12)';
+            recBtn.style.outline = recBtn.style.outline || '2px solid rgba(255,200,120,.6)';
             // add quick CTA
             var cta = document.createElement('div');
             cta.style.marginTop = '8px';
@@ -61,9 +90,9 @@ document.addEventListener('DOMContentLoaded', function () {
             var useBtn = document.getElementById('useRecommended');
             if (useBtn) {
                 useBtn.addEventListener('click', function () {
-                    // simulate selecting the shade
-                    recBtn.click();
-                    recBtn.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    selectShade(recIdx);
+                    var el = shadesContainer.querySelector('button[data-index="' + recIdx + '"]');
+                    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
                 });
             }
         }
