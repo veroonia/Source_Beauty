@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Pareto Chart — Quality Management (Source_Beauty)</title>
+  <style>
+    body{font-family:Arial,Helvetica,sans-serif;margin:20px}
+    .wrap{max-width:900px;margin:auto}
+    canvas{background:#fff;border:1px solid #eee}
+    table{width:100%;border-collapse:collapse;margin-top:16px}
+    th,td{padding:6px 8px;border:1px solid #ddd;text-align:left}
+    th{background:#f7f7f7}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h2>Pareto Chart — Quality Management</h2>
+    <p>Interactive Pareto chart showing defect categories and cumulative impact. Replace the sample numbers with your real metrics if available.</p>
+
+    <canvas id="pareto" width="860" height="420"></canvas>
+
+    <table id="summary">
+      <thead>
+        <tr><th>Category</th><th>Count</th><th>Cumulative %</th></tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    // SAMPLE DATA — edit these arrays with real metrics
+    const categories = ['UI', 'Checkout Errors', 'Payment Failures', 'Performance', 'Data/Validation', 'Integration', 'Security'];
+    const counts =     [45,   30,               20,                 10,            8,                5,             2];
+
+    // compute cumulative percentages
+    const total = counts.reduce((a,b)=>a+b,0);
+    let cum = 0;
+    const cumPercent = counts.map(v=>{ cum += v; return +(cum/total*100).toFixed(1); });
+
+    // populate summary table
+    const tbody = document.querySelector('#summary tbody');
+    for(let i=0;i<categories.length;i++){
+      const tr = document.createElement('tr');
+      tr.innerHTML = `<td>${categories[i]}</td><td>${counts[i]}</td><td>${cumPercent[i]}%</td>`;
+      tbody.appendChild(tr);
+    }
+
+    // Chart.js mixed chart (bars + cumulative line)
+    const ctx = document.getElementById('pareto').getContext('2d');
+    const pareto = new Chart(ctx, {
+      data: {
+        labels: categories,
+        datasets: [
+          {
+            type: 'bar',
+            label: 'Count',
+            data: counts,
+            backgroundColor: 'rgba(54, 162, 235, 0.8)'
+          },
+          {
+            type: 'line',
+            label: 'Cumulative %',
+            data: cumPercent,
+            yAxisID: 'percent',
+            borderColor: 'rgba(255,99,132,0.9)',
+            borderWidth: 2,
+            tension: 0.2,
+            fill: false,
+            pointBackgroundColor: 'rgba(255,99,132,0.9)'
+          }
+        ]
+      },
+      options: {
+        interaction: {mode:'index',intersect:false},
+        scales: {
+          y: {
+            beginAtZero: true,
+            title: {display:true,text:'Count'}
+          },
+          percent: {
+            type: 'linear',
+            position: 'right',
+            min: 0,
+            max: 100,
+            ticks: {callback: v => v + '%'},
+            grid: {drawOnChartArea:false},
+            title: {display:true,text:'Cumulative %'}
+          }
+        },
+        plugins: {
+          legend: {position:'top'}
+        }
+      }
+    });
+  </script>
+</body>
+</html>

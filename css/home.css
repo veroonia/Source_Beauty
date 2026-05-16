@@ -136,6 +136,8 @@ header {
     border: none;
     border-radius: 2px;
     cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
 }
 
 .btn-outline {
@@ -145,6 +147,8 @@ header {
     padding: 10px 16px;
     border-radius: 2px;
     cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
 }
 
 .products {
@@ -308,6 +312,18 @@ footer {
     font-weight: 700;
 }
 
+/* Shop by product link styles */
+.shop-by-product-link {
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+}
+
+.shop-by-product-link:hover h4,
+.shop-by-product-link:focus h4 {
+    color: #b3004a;
+}
+
 /* Product detail page */
 .product-page {
     min-height: 100vh;
@@ -445,6 +461,90 @@ footer {
 .shade-circle:hover {
     transform: scale(1.1);
     box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+}
+
+.shade-circle.selected {
+    border: 3px solid #b3004a;
+    box-shadow: 0 0 0 2px #fff, 0 0 0 4px #b3004a, 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.related-products {
+    margin-top: 30px;
+    background: rgba(255, 255, 255, 0.88);
+    border: 1px solid #f3e5ea;
+    border-radius: 24px;
+    padding: 24px;
+    box-shadow: 0 12px 36px rgba(0, 0, 0, 0.05);
+}
+
+.related-products-head {
+    margin-bottom: 16px;
+}
+
+.related-kicker {
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    font-size: 0.72rem;
+    color: #b3004a;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.related-products-head h3 {
+    font-size: clamp(1.25rem, 3vw, 1.9rem);
+    line-height: 1.1;
+}
+
+.related-products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 14px;
+}
+
+.related-product-card {
+    display: grid;
+    text-decoration: none;
+    color: inherit;
+    border: 1px solid #f4e2ea;
+    border-radius: 16px;
+    overflow: hidden;
+    background: #fff;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.related-product-card:hover,
+.related-product-card:focus-visible {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px rgba(179, 0, 74, 0.14);
+}
+
+.related-product-card img {
+    width: 100%;
+    height: 170px;
+    object-fit: cover;
+    display: block;
+}
+
+.related-product-copy {
+    padding: 12px;
+    display: grid;
+    gap: 4px;
+}
+
+.related-product-copy h4 {
+    font-size: 0.95rem;
+    line-height: 1.3;
+}
+
+.related-product-copy p {
+    font-size: 0.84rem;
+    color: #6b5a60;
+}
+
+.related-product-copy .related-price {
+    font-size: 0.92rem;
+    font-weight: 700;
+    color: #1a1a1a;
 }
 
 /* Sale banner */

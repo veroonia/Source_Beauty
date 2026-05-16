@@ -6,64 +6,7 @@
 var SB_CART_KEY = 'sb_cart';
 
 /* ── Product catalogue (single source of truth) ── */
-var SB_PRODUCTS = {
-    lipstick: {
-        id: 'lipstick',
-        name: 'Luxury Lipstick',
-        price: 750,
-        image: '../images/lipstick.jpg',
-        category: 'Makeup'
-    },
-    foundation: {
-        id: 'foundation',
-        name: 'Silk Foundation',
-        price: 1200,
-        image: '../images/foundation.jpg',
-        category: 'Makeup'
-    },
-    palette: {
-        id: 'palette',
-        name: 'Eyeshadow Palette',
-        price: 1050,
-        image: '../images/eyeshadow.jpg',
-        category: 'Makeup'
-    },
-    brushes: {
-        id: 'brushes',
-        name: 'Brushes Set',
-        price: 540,
-        image: '../images/brushes.jpg',
-        category: 'Tools'
-    },
-    skincare: {
-        id: 'skincare',
-        name: 'Skincare Kit',
-        price: 900,
-        image: '../images/skincare.jpg',
-        category: 'Skincare'
-    },
-    moisturizer: {
-        id: 'moisturizer',
-        name: 'Hydrating Moisturizer',
-        price: 1350,
-        image: '../images/foundation.jpg',
-        category: 'Skincare'
-    },
-    serum: {
-        id: 'serum',
-        name: 'Glow Serum',
-        price: 900,
-        image: '../images/lipstick.jpg',
-        category: 'Skincare'
-    },
-    lipgloss: {
-        id: 'lipgloss',
-        name: 'Luxe Lipgloss',
-        price: 600,
-        image: '../images/lipstick.jpg',
-        category: 'Makeup'
-    }
-};
+var SB_PRODUCTS = (window.SB_PRODUCT_DATA && window.SB_PRODUCT_DATA.catalog) || {};
 
 /* ── Promo codes ── */
 var PROMO_CODES = {

@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Histogram — Defect Frequency Over Time</title>
+  <style>
+    body{font-family:Arial,Helvetica,sans-serif;margin:20px}
+    .wrap{max-width:900px;margin:auto}
+    canvas{background:#fff;border:1px solid #eee}
+    table{width:100%;border-collapse:collapse;margin-top:12px}
+    th,td{padding:6px 8px;border:1px solid #ddd;text-align:left}
+    th{background:#f7f7f7}
+    .controls{margin:8px 0}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h2>Histogram — Defect Frequency Over Time</h2>
+    <p>Bar chart showing defect counts in time buckets. Replace the sample data with your actual timestamps and counts.</p>
+
+    <div class="controls">
+      <label for="bucket">Bucket:</label>
+      <select id="bucket">
+        <option value="month">Monthly</option>
+        <option value="week">Weekly</option>
+      </select>
+      <button id="update">Update</button>
+    </div>
+
+    <canvas id="hist" width="860" height="360"></canvas>
+
+    <table id="summary">
+      <thead><tr><th>Bucket</th><th>Count</th></tr></thead>
+      <tbody></tbody>
+    </table>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    // SAMPLE time-series data (ISO dates) — replace with real defect timestamps
+    const sampleDates = [
+      '2026-01-05','2026-01-12','2026-01-20','2026-02-01','2026-02-02','2026-02-18','2026-03-03','2026-03-10','2026-03-22','2026-04-05','2026-04-12','2026-05-02','2026-05-11','2026-05-18'
+    ];
+
+    function bucketCounts(dates, bucket){
+      const map = new Map();
+      dates.forEach(d=>{
+        const dt = new Date(d);
+        let key;
+        if(bucket==='month') key = dt.getFullYear() + '-' + String(dt.getMonth()+1).padStart(2,'0');
+        else { // week: ISO week-year
+          const tmp = new Date(Date.UTC(dt.getFullYear(), dt.getMonth(), dt.getDate()));
+          const dayNum = tmp.getUTCDay() || 7;
+          tmp.setUTCDate(tmp.getUTCDate() + 4 - dayNum);
+          const yearStart = new Date(Date.UTC(tmp.getUTCFullYear(),0,1));
+          const weekNo = Math.ceil((((tmp - yearStart) / 86400000) + 1)/7);
+          key = tmp.getUTCFullYear() + '-W' + String(weekNo).padStart(2,'0');
+        }
+        map.set(key, (map.get(key)||0) + 1);
+      });
+      // sort keys
+      const keys = Array.from(map.keys()).sort();
+      return {keys, counts: keys.map(k=>map.get(k))};
+    }
+
+    // initial data
+    let current = bucketCounts(sampleDates, 'month');
+
+    const ctx = document.getElementById('hist').getContext('2d');
+    const chart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: current.keys,
+        datasets: [{label:'Defect Count',data:current.counts,backgroundColor:'rgba(75,192,192,0.8)'}]
+      },
+      options: {scales:{y:{beginAtZero:true}},plugins:{legend:{display:false}}}
+    });
+
+    // populate table
+    function refreshTable(keys,counts){
+      const tbody = document.querySelector('#summary tbody'); tbody.innerHTML='';
+      for(let i=0;i<keys.length;i++){
+        const tr = document.createElement('tr');
+        tr.innerHTML = `<td>${keys[i]}</td><td>${counts[i]}</td>`;
+        tbody.appendChild(tr);
+      }
+    }
+    refreshTable(current.keys,current.counts);
+
+    document.getElementById('update').addEventListener('click',()=>{
+      const bucket = document.getElementById('bucket').value;
+      current = bucketCounts(sampleDates,bucket);
+      chart.data.labels = current.keys;
+      chart.data.datasets[0].data = current.counts;
+      chart.update();
+      refreshTable(current.keys,current.counts);
+    });
+  </script>
+</body>
+</html>

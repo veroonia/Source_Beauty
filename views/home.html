@@ -25,8 +25,7 @@
                 <h2>Bold Color. Beautiful You.</h2>
                 <p>Explore our curated collection of high-performance makeup.</p>
                 <div class="hero-cta">
-                    <button class="btn-primary">Shop Makeup</button>
-                    <button class="btn-outline">New Arrivals</button>
+                    <a href="products.html?category=makeup" class="btn-primary">Shop Makeup</a>
                 </div>
             </div>
         </div>
@@ -38,21 +37,21 @@
         <h2>Featured Products</h2>
         <div class="product-grid">
             <a class="product-card product-link" href="product.html?product=lipstick" data-product-id="lipstick">
-                <img src="../images/lipstick.jpg" alt="Lipstick">
+                <img src="../images/p_lipstick.jpg" alt="Lipstick">
                 <div class="product-body">
-                    <h3>Luxury Lipstick</h3>
+                    <h3>Nars Lipstick</h3>
                     <p>750 EGP</p>
                 </div>
             </a>
             <a class="product-card product-link" href="product.html?product=foundation" data-product-id="foundation">
-                <img src="../images/foundation.jpg" alt="Foundation">
+                <img src="../images/p_foundation.jpg" alt="Foundation">
                 <div class="product-body">
                     <h3>Silk Foundation</h3>
                     <p>1200 EGP</p>
                 </div>
             </a>
             <a class="product-card product-link" href="product.html?product=palette" data-product-id="palette">
-                <img src="../images/eyeshadow.jpg" alt="Palette">
+                <img src="../images/palette.jpg" alt="Palette">
                 <div class="product-body">
                     <h3>Eyeshadow Palette</h3>
                     <p>1050 EGP</p>
@@ -68,31 +67,31 @@
         <div class="container">
             <h2 class="section-title">Shop By Product</h2>
             <div class="featured-strip" aria-label="Featured products">
-                <div class="feat-item">
+                <a href="products.html?category=lipstick" class="feat-item shop-by-product-link" data-category="makeup">
                     <img src="../images/p_lipstick.jpg" alt="Lipstick">
                     <h4>Lipsticks</h4>
                     <p class="price">750 EGP</p>
-                </div>
-                <div class="feat-item">
+                </a>
+                <a href="products.html?category=foundation" class="feat-item shop-by-product-link" data-category="makeup">
                     <img src="../images/p_foundation.jpg" alt="Foundation">
                     <h4>Foundation</h4>
                     <p class="price">1200 EGP</p>
-                </div>
-                <div class="feat-item">
+                </a>
+                <a href="products.html?category=palette" class="feat-item shop-by-product-link" data-category="makeup">
                     <img src="../images/palette.jpg" alt="Palette">
                     <h4>Palettes</h4>
                     <p class="price">1050 EGP</p>
-                </div>
-                <div class="feat-item">
-                    <img src="../images/brushes.jpg" alt="Brushes">
+                </a>
+                <a href="products.html?category=brush" class="feat-item shop-by-product-link" data-category="makeup">
+                    <img src="../images/sephora brushes.jpg" alt="Brushes">
                     <h4>Brushes</h4>
                     <p class="price">540 EGP</p>
-                </div>
-                <div class="feat-item">
+                </a>
+                <a href="products.html?category=skincare" class="feat-item shop-by-product-link" data-category="skincare">
                     <img src="../images/skincare.jpg" alt="Skincare">
                     <h4>Skincare</h4>
                     <p class="price">900 EGP</p>
-                </div>
+                </a>
             </div>
         </div>
     </section>
@@ -105,8 +104,7 @@
                 <p class="lead">Up to 40% Off
                 <br>Fresh shades, skincare essentials and must-have tools.</p>
                 <div class="sale-ctas">
-                    <button class="btn-primary">Shop Now</button>
-                    <button class="btn-outline">Discover Offers</button>
+                    <a href="products.html?promotion=sale" class="btn-outline">Discover Offers</a>
                 </div>
             </div>
             <div class="sale-image" aria-hidden="true">
@@ -115,11 +113,9 @@
         </div>
     </section>
 
-    <!-- Info cards -->
-    
-
     <div id="site-footer"></div>
 
+    <script src="../js/product-data.js" defer></script>
     <script src="../js/home.js" defer></script>
     <script src="../js/cart.js" defer></script>
 </body>
