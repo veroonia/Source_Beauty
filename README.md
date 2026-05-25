@@ -26,7 +26,6 @@ Source Beauty is a static beauty e-commerce website built with HTML, CSS, and Ja
 
 ## Project Structure
 
-```text
 Source_Beauty/
 ├── css/
 │   ├── admin.css
@@ -59,6 +58,8 @@ Source_Beauty/
     ├── product.html
     ├── products.html
     └── signup.html
+
+
 
 How to Run
 This project does not require a backend server or build step.
