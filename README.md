@@ -15,7 +15,7 @@
 ---
 ## 🌟 Overview
 
-Source Beauty is a frontend e-commerce website developed as part of a **Project Management course** project.
+Source Beauty is a frontend e-commerce website developed as part of a **Softawre Project Management course** project.
 
 The core problem it solves is one many shoppers face: **finding the right makeup shade to match their skin tone**. To tackle this, the app integrates an **AI-powered shade-matching feature** — when a user selects their skin shade, an API intelligently suggests the most suitable product shades, making makeup shopping more personalized, accurate, and effortless for women.
 
