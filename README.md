@@ -1,30 +1,41 @@
-# Source Beauty
+<div align="center">
 
-Source Beauty is a static beauty e-commerce website built with HTML, CSS, and JavaScript. It includes a customer shopping experience, product catalog, cart and checkout pages, authentication screens, an admin dashboard, and quality-analysis flowcharts.
+# 💄 Source Beauty
 
-## Features
+**A modern, fully static beauty e-commerce experience built with vanilla HTML, CSS & JavaScript.**
 
-- Home page with hero section, featured products, sale banner, and navigation
-- Product catalog with beauty, skincare, and makeup items
-- Individual product detail pages
-- Shopping cart with quantity updates, totals, promo code area, and checkout link
-- Checkout page
-- Login and signup pages
-- Admin dashboard interface for products, orders, users, and analytics
-- Reusable navigation and footer HTML files
-- Product data managed in JavaScript
-- Flowchart pages for:
-  - Histogram defect frequency analysis
-  - Pareto quality analysis
+![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=flat-square&logo=html5&logoColor=white)
+![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=flat-square&logo=css3&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=javascript&logoColor=black)
+![Chart.js](https://img.shields.io/badge/Chart.js-FF6384?style=flat-square&logo=chartdotjs&logoColor=white)
+![No Build Step](https://img.shields.io/badge/No%20Build%20Step-✓-brightgreen?style=flat-square)
 
-## Tech Stack
+</div>
 
-- HTML5
-- CSS3
-- JavaScript
-- Chart.js CDN for chart visualizations
+---
 
-## Project Structure
+## 🌟 Overview
+
+Source Beauty is a frontend-only e-commerce website for a beauty brand. It features a complete customer shopping journey — from browsing products to checkout — alongside an admin dashboard and quality-analysis flowcharts. No backend, no build tools, no dependencies to install.
+
+---
+
+## ✨ Features
+
+| Area | Details |
+|------|---------|
+| 🏠 **Home** | Hero section, featured products, sale banner, and navigation |
+| 🛍️ **Product Catalog** | Beauty, skincare, and makeup items with filtering by category |
+| 📄 **Product Detail** | Individual product pages with descriptions, ratings, and shade options |
+| 🛒 **Shopping Cart** | Quantity updates, order totals, promo code area, and checkout link |
+| 💳 **Checkout** | Full checkout flow page |
+| 🔐 **Authentication** | Login and signup screens |
+| 🖥️ **Admin Dashboard** | Manage products, orders, users, and analytics |
+| 📊 **Quality Charts** | Histogram defect frequency and Pareto quality analysis via Chart.js |
+
+---
+
+## 🗂️ Project Structure
 
 Source_Beauty/
 ├── css/
@@ -37,7 +48,7 @@ Source_Beauty/
 │   ├── histogram-frequency.html
 │   └── pareto-quality.html
 ├── images/
-│   └── product and banner images
+│   └── (product and banner images)
 ├── js/
 │   ├── admin.js
 │   ├── auth.js
@@ -48,60 +59,103 @@ Source_Beauty/
 │   ├── product-page.js
 │   └── products.js
 └── views/
-    ├── admin.html
-    ├── cart.html
-    ├── checkout.html
-    ├── footer.html
-    ├── home.html
-    ├── login.html
-    ├── nav.html
-    ├── product.html
-    ├── products.html
-    └── signup.html
+├── admin.html
+├── cart.html
+├── checkout.html
+├── footer.html
+├── home.html
+├── login.html
+├── nav.html
+├── product.html
+├── products.html
+└── signup.html
 
+---
 
+## 🚀 Getting Started
 
-How to Run
-This project does not require a backend server or build step.
+No server, no build step, no dependencies.
 
-Download or clone the repository.
-Open the project folder.
-Open views/home.html in your browser.
-You can also navigate directly to other pages such as:
+```bash
+# 1. Clone the repository
+git clone https://github.com/your-username/source-beauty.git
 
-views/products.html
-views/cart.html
-views/checkout.html
-views/admin.html
-flowcharts/histogram-frequency.html
-flowcharts/pareto-quality.html
-Main Pages
-Page	Description
-views/home.html	Main landing page for Source Beauty
-views/products.html	Product catalog page
-views/product.html	Single product details page
-views/cart.html	Shopping cart page
-views/checkout.html	Checkout page
-views/login.html	Login page
-views/signup.html	Signup page
-views/admin.html	Admin dashboard
-flowcharts/histogram-frequency.html	Histogram chart for defect frequency
-flowcharts/pareto-quality.html	Pareto chart for quality analysis
-Product Data
-Product information is stored in:
+# 2. Open the project folder
+cd source-beauty
 
-js/product-data.js
-This file contains product names, prices, discounts, categories, images, descriptions, ratings, promotions, and shade options.
+# 3. Open the homepage in your browser
+open views/home.html
+```
 
-Notes
-The project is currently frontend-only.
-Cart and page interactions are handled with JavaScript.
-Product images are stored locally in the images/ folder.
-Chart pages use Chart.js through a CDN.
-Future Improvements
-Add backend support for real orders and users
-Connect authentication to a database
-Add payment gateway integration
-Add product search and advanced filters
-Improve admin dashboard with live data
-Add responsive testing across more screen sizes
+> **Tip:** You can also double-click `views/home.html` in your file explorer to open it directly.
+
+---
+
+## 📄 Pages
+
+| Page | Path | Description |
+|------|------|-------------|
+| 🏠 Home | `views/home.html` | Main landing page |
+| 🛍️ Products | `views/products.html` | Full product catalog |
+| 📦 Product Detail | `views/product.html` | Single product view |
+| 🛒 Cart | `views/cart.html` | Shopping cart |
+| 💳 Checkout | `views/checkout.html` | Checkout flow |
+| 🔑 Login | `views/login.html` | Login screen |
+| 📝 Sign Up | `views/signup.html` | Registration screen |
+| 🖥️ Admin | `views/admin.html` | Admin dashboard |
+| 📊 Histogram | `flowcharts/histogram-frequency.html` | Defect frequency chart |
+| 📈 Pareto | `flowcharts/pareto-quality.html` | Quality analysis chart |
+
+---
+
+## 🗃️ Product Data
+
+All product information is centralized in a single file:
+This includes: names, prices, discounts, categories, images, descriptions, ratings, promotions, and shade options. To add or modify products, edit this file only.
+
+---
+
+## 🛠️ Tech Stack
+
+- **HTML5** — Semantic markup and page structure
+- **CSS3** — Custom styling per section/page
+- **JavaScript (ES6)** — Cart logic, product rendering, UI interactions
+- **[Chart.js](https://www.chartjs.org/)** (via CDN) — Quality analysis visualizations
+
+---
+
+## 🔮 Roadmap
+
+- [ ] Backend integration for real orders and user accounts
+- [ ] Database-connected authentication
+- [ ] Payment gateway (Stripe / PayPal)
+- [ ] Product search and advanced filtering
+- [ ] Live data in admin dashboard
+- [ ] Responsive design testing across more screen sizes
+- [ ] Wishlist / favorites functionality
+
+---
+
+## 🤝 Contributing
+
+Contributions, issues, and feature requests are welcome!
+
+1. Fork the repository
+2. Create your feature branch: `git checkout -b feature/amazing-feature`
+3. Commit your changes: `git commit -m 'Add amazing feature'`
+4. Push to the branch: `git push origin feature/amazing-feature`
+5. Open a Pull Request
+
+---
+
+## 📜 License
+
+This project is licensed under the [MIT License](LICENSE).
+
+---
+
+<div align="center">
+
+Made with ❤️ by the Source Beauty team
+
+</div>
