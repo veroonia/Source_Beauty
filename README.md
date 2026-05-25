@@ -37,6 +37,7 @@ Source Beauty is a frontend-only e-commerce website for a beauty brand. It featu
 
 ## 🗂️ Project Structure
 
+```text
 Source_Beauty/
 ├── css/
 │   ├── admin.css
@@ -48,7 +49,7 @@ Source_Beauty/
 │   ├── histogram-frequency.html
 │   └── pareto-quality.html
 ├── images/
-│   └── (product and banner images)
+│   └── product and banner images
 ├── js/
 │   ├── admin.js
 │   ├── auth.js
@@ -59,17 +60,18 @@ Source_Beauty/
 │   ├── product-page.js
 │   └── products.js
 └── views/
-├── admin.html
-├── cart.html
-├── checkout.html
-├── footer.html
-├── home.html
-├── login.html
-├── nav.html
-├── product.html
-├── products.html
-└── signup.html
+    ├── admin.html
+    ├── cart.html
+    ├── checkout.html
+    ├── footer.html
+    ├── home.html
+    ├── login.html
+    ├── nav.html
+    ├── product.html
+    ├── products.html
+    └── signup.html
 
+```
 ---
 
 ## 🚀 Getting Started
